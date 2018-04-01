@@ -30,6 +30,7 @@ public class ConnWrite implements Runnable {
         try {
             connection.getConnections().put(connection);
         } catch (InterruptedException e) {
+            connection.setConnectionState(ConnectionState.CONN_CLOSING);
             e.printStackTrace();
         }
     }
@@ -45,7 +46,6 @@ public class ConnWrite implements Runnable {
             //os.flush();
         } catch (Exception e) {
             connection.setConnectionState(ConnectionState.CONN_CLOSING);
-            e.printStackTrace();
             return false;
         }
         return true;

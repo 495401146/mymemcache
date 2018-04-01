@@ -1,5 +1,6 @@
 package server.main;
 
+import config.Config;
 import connection.model.Connection;
 import connection.model.ConnectionState;
 import eventthread.*;
@@ -10,7 +11,7 @@ import java.util.concurrent.Executors;
 
 public class Dispatcher implements Runnable{
     private BlockingQueue<Connection> connections;
-    private boolean stop = false;
+    public boolean stop = Config.STOP;
     private int instanceNum = 0;
     public static ExecutorService executor = Executors.newFixedThreadPool(10);
     public Dispatcher(BlockingQueue<Connection> connections)
@@ -21,8 +22,10 @@ public class Dispatcher implements Runnable{
     public void run() {
         while(!stop)
         {
+            stop = Config.STOP;
+            Connection connection = null;
             try {
-                Connection connection = connections.take();
+                connection = connections.take();
                 //System.out.println("连接池为空了么："+connections.isEmpty());
                 ConnectionState state = connection.getConnectionState();
                 if(ConnectionState.CONN_WAITING.equals(state))
@@ -47,7 +50,10 @@ public class Dispatcher implements Runnable{
                 }
                 //connections.put(connection);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                if(connection!=null)
+                {
+                    connection.setConnectionState(ConnectionState.CONN_CLOSING);
+                }
             }
         }
     }

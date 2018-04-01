@@ -33,6 +33,7 @@ public class ConnRead implements Runnable {
         try {
             connection.getConnections().put(connection);
         } catch (InterruptedException e) {
+            connection.setConnectionState(ConnectionState.CONN_CLOSING);
             e.printStackTrace();
         }
     }

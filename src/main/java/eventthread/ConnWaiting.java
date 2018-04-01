@@ -27,12 +27,14 @@ public class ConnWaiting implements Runnable {
                 }
                 Thread.sleep(100);
             } catch (Exception e) {
+                connection.setConnectionState(ConnectionState.CONN_CLOSING);
                 e.printStackTrace();
             }
         }
         try {
             connection.getConnections().put(connection);
         } catch (InterruptedException e) {
+            connection.setConnectionState(ConnectionState.CONN_CLOSING);
             e.printStackTrace();
         }
     }

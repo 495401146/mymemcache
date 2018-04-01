@@ -2,6 +2,7 @@ package cmd;
 
 import Message.Message;
 import cache.Cache;
+import cache.model.DictValue;
 import connection.model.Connection;
 
 public class GETCommand implements Command {
@@ -19,15 +20,15 @@ public class GETCommand implements Command {
         StringBuilder sb = new StringBuilder();
         //VALUE <key> <flags> <bytes>\r\n
         for (String key:keys) {
-            String value = Cache.getValue(key);
-            if(value==null)
+            DictValue dictValue = Cache.get(key);
+            if(dictValue==null)
             {
                 continue;
             }
-            String flags = Cache.getFlag(key);
-            sb.append("VALUE "+key+" "+flags+" "+value.length()+"\\r\\n"+
-            value+"\r\n");
+            sb.append("VALUE "+key+" "+dictValue.getFlags()+" "+dictValue.getValue().length()+"\\r\\n"+
+            dictValue.getValue()+"\r\n");
         }
+        sb.append("END\\r\\n\"");
         System.out.println("get操作返回的数据："+sb.toString());
         Message message = new Message(sb.toString(),CMDType.GET_CMD,connection);
         return message;

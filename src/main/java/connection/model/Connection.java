@@ -20,6 +20,8 @@ public class Connection {
 
     //回写的message
     Message message;
+    //命令解析后需要读取的数据块长度
+    private StringBuilder itemBuilder = new StringBuilder();
 
     public Socket getClientSocket() {
         return clientSocket;

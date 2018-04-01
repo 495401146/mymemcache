@@ -23,12 +23,17 @@ public class WriteCommand implements Command {
 
     public Message execute() {
         StringBuilder sb = new StringBuilder();
-        if(Cache.getValue(this.key)!=null)
+        if(Cache.get(this.key)!=null)
         {
             sb.append(Response.CMD_SET_EXISTS);
         }
         else{
-            Cache.set(this.key,this.value,this.flags);
+            if(!Cache.set(this.key,this.value,this.flags,this.expire))
+            {
+                Message message = new Message(Response.ERROR_SERVER_SET
+                ,CMDType.SET_CMD,connection);
+                return message;
+            }
             sb.append(Response.CMD_SET_SUCCESS);
         }
         System.out.println("设置键值，key:"+this.key+",value:"+this.value);

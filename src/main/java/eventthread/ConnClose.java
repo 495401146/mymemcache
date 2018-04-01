@@ -2,6 +2,8 @@ package eventthread;
 
 import connection.model.Connection;
 
+import java.io.IOException;
+
 public class ConnClose implements Runnable {
     private Connection connection;
 
@@ -14,6 +16,11 @@ public class ConnClose implements Runnable {
     public void run() {
         assert connection !=null;
         connection.getConnections().remove(connection);
+        try {
+            connection.getClientSocket().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         connection = null;
     }
 }
