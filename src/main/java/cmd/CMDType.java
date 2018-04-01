@@ -5,4 +5,5 @@ public enum CMDType {
     SET_CMD,
     DELETE_CMD,
     Error_CMD,
+    ADD_CDM
 }

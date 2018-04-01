@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+//封装的lru链，用读写锁保持线程安全
 public class LruCache<K,V> {
     private static int MAX_LENGTH = Config.WRITE_THREAD_NUM;  //最大长度
     private static int initLen = Config.INIT_LEN;//初始长度
@@ -16,7 +17,7 @@ public class LruCache<K,V> {
     private ReadWriteLock lock = new ReentrantReadWriteLock(); //读写锁
     private static volatile LruCache lruCache;
 
-
+    //单例，此存储必须保证只有一个
     public static LruCache newInstance()
     {
         if(lruCache==null)
@@ -90,10 +91,11 @@ public class LruCache<K,V> {
         lock.writeLock().unlock();
     }
 
-
+    /**
+     * 用于后台线程定期进行清除过期键
+     */
     public void flush()
     {
-        System.out.println("进行清洗");
         lock.readLock().lock();
         if(map.size()==0)
         {
@@ -105,12 +107,15 @@ public class LruCache<K,V> {
             String key = (String) entry.getKey();
             DictValue dictValue = (DictValue) entry.getValue();
             lock.readLock().unlock();
-            Date nowDate = new Date();
-            if(nowDate.before(new Date(dictValue.getExpireTime())))
+            if(dictValue.getExpireTime()==null)
             {
-                lock.writeLock().lock();
+                continue;
+            }
+            Date nowDate = new Date();
+            if(nowDate.after(new Date(Long.valueOf(dictValue.getExpireTime()))))
+            {
+                //System.out.println("后台刷新删除了"+key);
                 remove(key);
-                lock.writeLock().unlock();
             }
         }
 

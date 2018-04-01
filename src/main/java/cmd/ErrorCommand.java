@@ -2,7 +2,7 @@ package cmd;
 
 import Message.Message;
 import connection.model.Connection;
-
+//当出现错误命令时调用此类
 public class ErrorCommand implements Command {
     private Connection connection;
     private String errMessage;

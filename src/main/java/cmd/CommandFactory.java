@@ -1,5 +1,6 @@
 package cmd;
 
+
 public class CommandFactory {
     private CommandFactory() {}
     private volatile CommandFactory commandFactory;

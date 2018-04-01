@@ -1,5 +1,5 @@
 package cmd;
-
+//对所有固定的响应消息做封装
 public class Response {
     //set操作
     public static final String CMD_SET_SUCCESS = "STORED\\r\\n";

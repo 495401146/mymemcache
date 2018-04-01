@@ -1,17 +1,29 @@
 package cache.model;
 
 
-
+/**
+ * 存储结构
+ */
 public class DictValue {
-    private String value;
+    private volatile String value;
     private String flags;
-    private String expireTime;
+    private volatile String expireTime;
+    private volatile boolean deleted;
 
     public DictValue(String value, String flags, String expireTime) {
         this.value = value;
         this.flags = flags;
         this.expireTime = expireTime;
+        this.deleted = false;
     };
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
     @Override
     public boolean equals(Object o) {

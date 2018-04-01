@@ -5,6 +5,9 @@ import connection.model.Connection;
 
 import java.net.Socket;
 
+/**
+ * 向客户端回传的消息结构
+ */
 public class Message {
     String msg = "";
     CMDType cmdType;

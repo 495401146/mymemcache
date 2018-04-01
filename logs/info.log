@@ -1,0 +1,16 @@
+2018-04-01 20:43:11  [ main:0 ] - [ INFO ]  main:创建了一个分发线程
+2018-04-01 20:43:11  [ main:4 ] - [ INFO ]  启动了定时清洗任务
+2018-04-01 20:43:11  [ pool-3-thread-1:5 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:43:21  [ pool-3-thread-1:10012 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:43:31  [ pool-3-thread-1:20016 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:43:41  [ pool-3-thread-1:30021 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:43:51  [ pool-3-thread-1:40021 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:44:01  [ pool-3-thread-1:50027 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:44:11  [ pool-3-thread-1:60031 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:44:21  [ pool-3-thread-1:70032 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:44:31  [ pool-3-thread-1:80033 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:44:41  [ pool-3-thread-1:90038 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:44:51  [ pool-3-thread-1:100044 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:45:01  [ pool-3-thread-1:110046 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:45:11  [ pool-3-thread-1:120054 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
+2018-04-01 20:45:21  [ pool-3-thread-1:130057 ] - [ INFO ]  pool-3-thread-1:开始清洗一次
