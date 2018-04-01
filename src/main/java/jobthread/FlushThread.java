@@ -4,28 +4,37 @@ import cache.model.DictValue;
 import cache.model.LruCache;
 import config.Config;
 
+import org.apache.log4j.Logger;
 
+/**
+ * 后台线程，用于定期对过期键进行删除
+ */
 public class FlushThread implements Runnable {
+    private static final Logger logger = Logger.getLogger(FlushThread.class);
     private boolean stop = Config.STOP;
+    LruCache<String,DictValue> lruCache = LruCache.newInstance();
     public FlushThread()
     {
-        System.out.println("启动了定时清洗任务");
+        logger.info(Thread.currentThread().getName()+":start a flush thread");
     }
+    //进行刷新，config中stop用于控制
     public void run() {
         while(!stop)
         {
+            logger.info(Thread.currentThread().getName()+":start flush");
             stop = Config.STOP;
-            LruCache<String,DictValue> lruCache = LruCache.newInstance();
-            //System.out.println("flushTHREAD:" +lruCache);
+            //System.out.println("用户名"+lruCache.get("username"));
             if(lruCache.getLength()!=0)
             {
-                System.out.println("开始清洗");
+                //System.out.println("刷新");
                 lruCache.flush();
+                logger.info(Thread.currentThread().getName()+"success flush");
             }
             try {
-                Thread.sleep(1);
+                //定时用sleep控制
+                Thread.sleep(Config.FLUSH_TIMES);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.error(Thread.currentThread().getName()+"thread is exception");
             }
         }
     }

@@ -4,8 +4,12 @@ import Message.Message;
 import cache.Cache;
 import cache.model.DictValue;
 import connection.model.Connection;
-
+import org.apache.log4j.Logger;
+/**
+ * get命令
+ */
 public class GETCommand implements Command {
+    private static final Logger logger = Logger.getLogger(GETCommand.class);
     private CMDType cmdType = CMDType.GET_CMD;
     private String[] keys;
     private Connection connection;
@@ -29,7 +33,8 @@ public class GETCommand implements Command {
             dictValue.getValue()+"\r\n");
         }
         sb.append("END\\r\\n\"");
-        System.out.println("get操作返回的数据："+sb.toString());
+        logger.info(Thread.currentThread().getName()+"" +
+                "get command|"+sb.toString());
         Message message = new Message(sb.toString(),CMDType.GET_CMD,connection);
         return message;
     }

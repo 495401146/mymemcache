@@ -5,6 +5,10 @@ import Message.Message;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * 连接类，此类是最关键类的，用于在线程中传递，他的状态改变可以触发对应的事件
+ * 保存了整个连接的所有信息
+ */
 public class Connection {
     //存储与客户端保持连接的socket
     private Socket clientSocket;
