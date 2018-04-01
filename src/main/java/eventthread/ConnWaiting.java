@@ -11,9 +11,11 @@ public class ConnWaiting implements Runnable {
 
     public ConnWaiting(Connection connection)
     {
+        System.out.println("创建了一个等待的连接");
         this.connection = connection;
     }
     public void run() {
+        System.out.println("等待执行");
         Socket socket = connection.getClientSocket();
         while(true)
         {
@@ -27,6 +29,11 @@ public class ConnWaiting implements Runnable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        try {
+            connection.getConnections().put(connection);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

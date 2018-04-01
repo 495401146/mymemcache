@@ -1,6 +1,8 @@
 package cmd;
 
+import Message.Message;
+
 public interface Command {
-    public String execute();
+    public Message execute();
     public CMDType getCmdType();
 }

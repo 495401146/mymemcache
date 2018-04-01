@@ -6,6 +6,4 @@ public enum ConnectionState {
     CONN_READ,
     CONN_WRITE,
     CONN_CLOSING,
-    CONN_CLOSED,
-    CONN_NEW_CMD
 }

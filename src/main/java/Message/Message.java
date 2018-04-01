@@ -1,28 +1,27 @@
 package Message;
 
 import cmd.CMDType;
+import connection.model.Connection;
 
 import java.net.Socket;
 
 public class Message {
-    Socket socket;
-    String msg;
+    String msg = "";
     CMDType cmdType;
-    MessageType messageType;
+    Connection connection;
 
-    public Message(Socket socket, String msg, CMDType cmdType, MessageType messageType) {
-        this.socket = socket;
+    public Message(String msg, CMDType cmdType, Connection connection) {
         this.msg = msg;
         this.cmdType = cmdType;
-        this.messageType = messageType;
+        this.connection = connection;
     }
 
-    public Socket getSocket() {
-        return socket;
+    public Connection getConnection() {
+        return connection;
     }
 
-    public void setSocket(Socket socket) {
-        this.socket = socket;
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 
     public String getMsg() {
@@ -41,11 +40,4 @@ public class Message {
         this.cmdType = cmdType;
     }
 
-    public MessageType getMessageType() {
-        return messageType;
-    }
-
-    public void setMessageType(MessageType messageType) {
-        this.messageType = messageType;
-    }
 }

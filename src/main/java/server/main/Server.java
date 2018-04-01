@@ -16,11 +16,8 @@ public class Server {
     public static void main(String[] args)
     {
         try {
-            for(int i = 0;i<10;i++)
-            {
-                executor.execute(new ConnectionHandler(connections));
-            }
-
+            Thread dispatcherThread = new Thread(new Dispatcher(connections));
+            dispatcherThread.start();
             ServerSocket serverSocket = new ServerSocket(11000);
 
             while(true)
@@ -38,6 +35,7 @@ public class Server {
     private static void addConnection(Socket socket) {
         Connection connection = new Connection(socket, ConnectionState.CONN_WAITING,connections);
         try {
+            System.out.println("一个连接被放入队列");
             connections.put(connection);
         } catch (InterruptedException e) {
             e.printStackTrace();
