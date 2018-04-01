@@ -1,8 +1,7 @@
 package eventthread.model;
 
 public class ReadState {
-    private static final int READ_NO_DATA_RECEIVED = 0;
-    private static final int READ_DATA_RECEIVED = 0;
-    private static final int READ_ERROR = 0;
-    private static final int READ_MEMORY_ERROR = 0;
+    public static final int READ_NO_DATA_RECEIVED = 0;
+    public static final int READ_DATA_RECEIVED = 1;
+    public static final int READ_ERROR = 2;
 }

@@ -1,5 +1,7 @@
 package connection.model;
 
+import Message.Message;
+
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 
@@ -10,20 +12,16 @@ public class Connection {
     //读取到的字节数
     private StringBuilder builder = new StringBuilder();
 
-    public StringBuilder getRbuilder() {
-        return rbuilder;
-    }
-
-    public void setRbuilder(StringBuilder rbuilder) {
-        this.rbuilder = rbuilder;
-    }
-
-    private StringBuilder rbuilder = new StringBuilder();
 
     //所在的connection容器
     private volatile BlockingQueue<Connection> connections;
     //对应的连接状态
     private volatile ConnectionState connectionState;
+
+    //回写的message
+    Message message;
+    //命令解析后需要读取的数据块长度
+    private StringBuilder itemBuilder = new StringBuilder();
 
     public Socket getClientSocket() {
         return clientSocket;
@@ -57,9 +55,18 @@ public class Connection {
         this.connectionState = connectionState;
     }
 
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
+    }
+
     public Connection(Socket clientSocket, ConnectionState connectionState,
                       BlockingQueue<Connection> connections)
     {
+
         this.clientSocket = clientSocket;
         this.connectionState = connectionState;
         this.connections = connections;
