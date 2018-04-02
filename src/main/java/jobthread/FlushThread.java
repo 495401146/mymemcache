@@ -21,11 +21,11 @@ public class FlushThread implements Runnable {
     public void run() {
         while(!stop)
         {
-            logger.info(Thread.currentThread().getName()+":start flush");
             stop = Config.STOP;
             //System.out.println("用户名"+lruCache.get("username"));
             if(lruCache.getLength()!=0)
             {
+                logger.info(Thread.currentThread().getName()+":start flush");
                 //System.out.println("刷新");
                 lruCache.flush();
                 logger.info(Thread.currentThread().getName()+"success flush");

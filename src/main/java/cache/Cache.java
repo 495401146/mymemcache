@@ -17,11 +17,11 @@ public class Cache {
      * @return DictValue
      */
     public static DictValue get(String key) {
-        //System.out.println("获取了键值对，键为" + key + ",值为" + cache.get(key));
         DictValue dictValue = cache.get(key);
         if (dictValue == null) {
             return null;
         }
+        System.out.println("get command|key:" + key + ",value:" + cache.get(key).getValue());
         if(dictValue.getExpireTime()==null)
         {
             return cache.get(key);
@@ -61,7 +61,7 @@ public class Cache {
         }
         DictValue dictValue = new DictValue(value, flag, expireTime);
         cache.put(key, dictValue);
-        //System.out.println("设置了键值对，键为" + key + ",值为" + value);
+        System.out.println("set command|key:" + key + ",value:" + value);
         if (cache.containsKey(key)) {
             return true;
         } else {
@@ -81,6 +81,7 @@ public class Cache {
         int times = Integer.valueOf(time);
         DictValue dictValue = cache.get(key);
         if(times==0) {
+            System.out.println("delete command:"+key);
             cache.remove(key);
             if (cache.containsKey(key)) {
                 return false;

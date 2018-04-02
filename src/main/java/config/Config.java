@@ -8,7 +8,7 @@ public class Config {
     public static final int WRITE_THREAD_NUM = 10;
 
     //用作钩子，可以使线程结束
-    public static final boolean STOP = false;
+    public static boolean STOP = false;
 
     //LRUCache初始长度
     public static final int INIT_LEN = 16;
@@ -30,5 +30,5 @@ public class Config {
     //当读取buffer的字节数已经大于这个数但是还没读到/n时报异常
     public static final int EXCEPTED_BYTES = 1024;
     //服务器端口号
-    public static final int port = 11000;
+    public static final int PORT = 11000;
 }
