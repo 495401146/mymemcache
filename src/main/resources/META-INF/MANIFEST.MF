@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: libs/slf4j-api-1.6.6.jar libs/slf4j-log4j12-1.6.6.jar libs
+ /log4j-1.2.16.jar
+Main-Class: server.Server
+

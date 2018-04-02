@@ -7,8 +7,10 @@ import jobthread.FlushThread;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.concurrent.*;
 //主线程，一切初始化操作在这里进行
 public class Server {
@@ -17,7 +19,21 @@ public class Server {
     private static BlockingQueue<Connection> connections = new LinkedBlockingQueue<Connection>();
     public static void main(String[] args)
     {
+        int port;
+        if(args.length>0) {
+            try {
+                port = Integer.valueOf(args[0]);
+            } catch (Exception e) {
+                port = Config.PORT;
+            }
+        }else{
+            port = Config.PORT;
+        }
+        System.out.println("start running port bind "+port);
         try {
+
+            ServerSocket serverSocket = new ServerSocket(port);
+
             //开启dispatcher线程，分发事件，用singleThreadPool可靠性高
             ExecutorService dispatcherService = Executors.newSingleThreadExecutor();
             dispatcherService.execute(new Dispatcher(connections));
@@ -25,7 +41,7 @@ public class Server {
             ExecutorService flushService = Executors.newSingleThreadExecutor();
             flushService.execute(new FlushThread());
 
-            ServerSocket serverSocket = new ServerSocket(Config.port);
+
 
             while(true)
             {
@@ -36,9 +52,9 @@ public class Server {
                 }
                 //加入连接队列
                 addConnection(socket);
-
             }
         } catch (IOException e) {
+            e.printStackTrace();
             logger.error(e.getMessage());
             logger.error(Thread.currentThread().getName()+":socket network is exception");
         }

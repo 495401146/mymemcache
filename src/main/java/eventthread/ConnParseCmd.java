@@ -158,7 +158,7 @@ public class ConnParseCmd implements Runnable {
     //检验delete的参数，包括times是否为整数
     public boolean validataDeleteParam(String times)
     {
-        if(ValidateUtils.isNumeric(times))
+        if(ValidateUtils.isNumeric(times)&&Integer.valueOf(times)>0)
         {
             return true;
         }
